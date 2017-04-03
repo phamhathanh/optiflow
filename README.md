@@ -44,7 +44,7 @@ Numerical paramters:
 --jjmax		maximal number of outer iterations
 --errc		value for the stopping criterion \eps_{stop} on the residual
 --beta		0 for perimeter constraint, 1 for volume constraint (default)
---delta		Select the functional : 0 for the dissipated energy, 1 for the least-square profile at the outlet
+--delta		Select the functional : 1 for the dissipated energy, 0 for the least-square profile at the outlet
 --cv		Ratio (required constraint value)/(initial constraint value). 1 for an identical initial and required volume or perimeter
 --alpha		Update ratio for b : b^{n+1}=alpha*b^n
 --save		1=save all figures in the result directory, 0=save nothing at all
