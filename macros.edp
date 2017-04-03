@@ -43,7 +43,7 @@ macro J() (2*delta*mu*int2d(Th)(tr(EPS(ux,uy))*EPS(ux,uy)) + ((1.-delta)/2)*int1
 
 macro EL() (J/J0 + l*(contr(Th) - ctarget)/c0 + b/2 * ((contr(Th) - ctarget)^2)/(c0^2)) //EOM
 
-//macro gradV() (IJ/J0 + l/vol0 + b*(vol(Th)-voltarget)/(vol0^2)) //EOM
+macro gradV() (IJ/J0 + l/vol0 + b*(vol(Th)-voltarget)/(vol0^2)) //EOM
 
 macro gradC() (beta*1+(1.-beta)*kappa) //EOM
 macro gradCG() (y) //EOM
