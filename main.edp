@@ -223,20 +223,20 @@ macro regulbord() {
     +on(1, 2, dpy=0);
 } //EOM
 	   
-string strname = getARGV("--resu", "");
-cout << "Results and figures will be saved in " << strname << endl;
-//strname = "resu/"+strname;
-system("mkdir "+strname);
-savemesh(Th, strname+"/initmesh.msh");
+string outputFolder = getARGV("--resu", "");
+cout << "Results and figures will be saved in " << outputFolder << endl;
+//outputFolder = "resu/"+outputFolder;
+system("mkdir "+outputFolder);
+savemesh(Th, outputFolder+"/initmesh.msh");
 /* Save the command */
-ofstream cmd(strname+"/commande.sh");
+ofstream cmd(outputFolder+"/commande.sh");
 for (int ii = 0; ii < ARGV.n; ii++)
   cmd << ARGV[ii] << " ";
 
 cmd << endl;
 cmd.flush;
-ofstream r(strname+"/out.dat");
-ofstream volc(strname+"/voltarget");
+ofstream r(outputFolder+"/out.dat");
+ofstream volc(outputFolder+"/voltarget");
 volc << ctarget << endl;
 volc.flush;
 
@@ -246,7 +246,7 @@ kappa = kc * kappa;
 ns;	    
 J0 = J;
 {
-  ofstream j0of(strname+"/J0");
+  ofstream j0of(outputFolder+"/J0");
   j0of << J0 << endl;
   j0of.flush;
 }
@@ -306,16 +306,16 @@ for (jj = 0; (sv > errc) && (jj < jjmax); jj++) {
   /* Save post-processing data */
   
   if (save && (jj % every == 0)) {
-    plot(Th, [dpx, dpy], ps=strname+"/displacement"+ct+".ps", wait=0, value=1, cmm="Iteration "+jj+"/"+jjmax+" (config "+config+")");
+    plot(Th, [dpx, dpy], ps=outputFolder+"/displacement"+ct+".ps", wait=0, value=1, cmm="Iteration "+jj+"/"+jjmax+" (config "+config+")");
     Vh tmpvh = tr(EPS(ux,uy))*EPS(ux,uy);
-    plot(tmpvh, ps=strname+"/energs.ps", cmm="Dissipated energy", wait=0, fill=1, value=1);
-    plot(Th, [ux, uy], ps=strname+"/velocity"+ct+".ps", wait=0, value=1, cmm="Iteration "+jj+"/"+jjmax+" (config "+config+")");
+    plot(tmpvh, ps=outputFolder+"/energs.ps", cmm="Dissipated energy", wait=0, fill=1, value=1);
+    plot(Th, [ux, uy], ps=outputFolder+"/velocity"+ct+".ps", wait=0, value=1, cmm="Iteration "+jj+"/"+jjmax+" (config "+config+")");
 
     mx=sqrt(dx(dpx)^2+dy(dpy)^2);
-    plot(mx, fill=1, value=1,cmm="\|V\|", ps=strname+"/gradnorm"+ct+".ps");
+    plot(mx, fill=1, value=1,cmm="\|V\|", ps=outputFolder+"/gradnorm"+ct+".ps");
   
-    plot(Th, ps=strname+"/mesh"+ct+".ps", wait=0, value=1, cmm="Iteration "+jj+"/"+jjmax+" (config "+config+")");
-    savemesh(Th, strname+"/mesh"+ct+".msh");
+    plot(Th, ps=outputFolder+"/mesh"+ct+".ps", wait=0, value=1, cmm="Iteration "+jj+"/"+jjmax+" (config "+config+")");
+    savemesh(Th, outputFolder+"/mesh"+ct+".msh");
     
     ct++;
     r.flush;
@@ -327,7 +327,7 @@ for (jj = 0; (sv > errc) && (jj < jjmax); jj++) {
 
 /* Save post-processing data */
 if (save) {
-  plot(Th, [ux,uy], ps=strname+"/velocity.ps", cmm="Velocity", wait=0);
-  savemesh(Th, strname+"/mesh_final.msh");
+  plot(Th, [ux,uy], ps=outputFolder+"/velocity.ps", cmm="Velocity", wait=0);
+  savemesh(Th, outputFolder+"/mesh_final.msh");
   r.flush;
 }
