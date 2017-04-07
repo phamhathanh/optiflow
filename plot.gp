@@ -1,4 +1,4 @@
-path = "resu/case1/"
+path = "resu/case6/"
 
 set terminal pdfcairo size 20cm, 15cm
   set output path."multi.pdf"
