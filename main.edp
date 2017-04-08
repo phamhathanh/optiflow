@@ -5,6 +5,8 @@ include "getARGV.idp"
 include "macros.edp"
 include "curvature.edp"
 
+load "medit";
+
 int config = getARGV("--config", 1);
 
 real ll = 1.5;
@@ -315,12 +317,13 @@ for (jj = 0; (sv > errc) && (jj < jjmax); jj++) {
     Vh tmpvh = tr(EPS(ux,uy))*EPS(ux,uy);
     plot(tmpvh, ps=outputFolder+"/energs.ps", cmm="Dissipated energy", wait=0, fill=1, value=1);
     plot(Th, [ux, uy], ps=outputFolder+"/velocity"+ct+".ps", wait=0, value=1, cmm="Iteration "+jj+"/"+jjmax+" (config "+config+")");
+    savesol(outputFolder+"/mesh"+ct+".sol", Th, [ux, uy]);
 
     mx=sqrt(dx(dpx)^2+dy(dpy)^2);
     plot(mx, fill=1, value=1,cmm="\|V\|", ps=outputFolder+"/gradnorm"+ct+".ps");
   
     plot(Th, ps=outputFolder+"/mesh"+ct+".ps", wait=0, value=1, cmm="Iteration "+jj+"/"+jjmax+" (config "+config+")");
-    savemesh(Th, outputFolder+"/mesh"+ct+".msh");
+    savemesh(Th, outputFolder+"/mesh"+ct+".mesh");
     
     ct++;
     r.flush;
@@ -333,6 +336,7 @@ for (jj = 0; (sv > errc) && (jj < jjmax); jj++) {
 /* Save post-processing data */
 if (save) {
   plot(Th, [ux,uy], ps=outputFolder+"/velocity.ps", cmm="Velocity", wait=0);
+  savesol(outputFolder+"/mesh_final.sol", Th, [ux, uy]);
   savemesh(Th, outputFolder+"/mesh_final.msh");
   r.flush;
 }
