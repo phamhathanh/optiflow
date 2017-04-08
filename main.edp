@@ -233,7 +233,7 @@ string outputFolder = getARGV("--resu", "");
 cout << "Results and figures will be saved in " << outputFolder << endl;
 //outputFolder = "resu/"+outputFolder;
 system("mkdir "+outputFolder);
-savemesh(Th, outputFolder+"/initmesh.msh");
+savemesh(Th, outputFolder+"/initmesh.mesh");
 /* Save the command */
 ofstream cmd(outputFolder+"/commande.sh");
 for (int ii = 0; ii < ARGV.n; ii++)
@@ -337,6 +337,6 @@ for (jj = 0; (sv > errc) && (jj < jjmax); jj++) {
 if (save) {
   plot(Th, [ux,uy], ps=outputFolder+"/velocity.ps", cmm="Velocity", wait=0);
   savesol(outputFolder+"/mesh_final.sol", Th, [ux, uy]);
-  savemesh(Th, outputFolder+"/mesh_final.msh");
+  savemesh(Th, outputFolder+"/mesh_final.mesh");
   r.flush;
 }
