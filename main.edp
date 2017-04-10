@@ -154,8 +154,12 @@ if (config == 5) {
   uyy = 0;
 }
 
-if (config == 6) {
+if (config == 6 || config == 7) {
   clx = y*(1-y);
+}
+
+if (config == 8) {
+  clx = -1 - 2*cos(4*pi*y);
 }
 
 

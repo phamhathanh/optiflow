@@ -24,9 +24,17 @@ case "$1" in
 	;;
     6)
 	echo "Launching test-case 6"
-	FreeFem++ main.edp --config 6 --resu resu\case6 --binit 0 --btarget 0 --tau .01 --l0 0 --raffinit .03 --beta 0 --gamma .01
+	FreeFem++ main.edp --config 6 --resu resu\case6 --binit 10 --btarget 100 --tau .01 --l0 0 --raffinit .03 --gamma .01
+	;;
+    7)
+	echo "Launching test-case 7"
+	FreeFem++ main.edp --config 7 --resu resu\case7 --binit 100 --btarget 1000 --tau .01 --l0 0 --raffinit .03 --beta 0 --gamma .01
+	;;
+    8)
+	echo "Launching test-case 8"
+	FreeFem++ main.edp --config 8 --resu resu\case8 --binit 10 --btarget 100 --tau .01 --l0 0 --raffinit .03 --gamma .01
 	;;
     *)
-	echo "Usage : $0 {1|2|3|4|5|6}"
+	echo "Usage : $0 {1|2|3|4|5|6|7|8}"
 	;;
 esac
